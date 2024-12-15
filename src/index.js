@@ -1,7 +1,7 @@
 import './pages/index.css'; 
 import {initialCards} from './scripts/components/cards';
 import {createCard,deleteCard,handleLikeCard} from './scripts/components/card';
-import{openModal,closeModelListener,closeModal} from './scripts/components/modal';
+import{openModal,addCloseModelListeners,closeModal} from './scripts/components/modal';
 
 // @todo: DOM узлы 
 const cardPlace = document.querySelector('.places__list');
@@ -22,9 +22,10 @@ const jobInput = formProfile.querySelector('.popup__input_type_description');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__description');
 
-const formCard = document.querySelector('.popup_type_new-card');
-const namePlaceInput = formCard.querySelector('.popup__input_type_card-name');
-const linkPlaceInput = formCard.querySelector('.popup__input_type_url');
+const formCardModalWindow = document.querySelector('.popup_type_new-card');
+const formCard = formCardModalWindow.querySelector('.popup__form')
+const namePlaceInput = formCardModalWindow.querySelector('.popup__input_type_card-name');
+const linkPlaceInput = formCardModalWindow.querySelector('.popup__input_type_url');
 
 function handleOpenImage(data){
   imageCard.src =data.link;
@@ -51,7 +52,8 @@ function handleFormCardSubmit(evt){
       handleLikeCard,
       handleOpenImage),
     );
-  closeModal(formCard);
+  closeModal(formCardModalWindow);
+  formCard.reset();
 };
 
 buttomEditProfile.addEventListener('click',function(){
@@ -63,9 +65,9 @@ buttomAddCard.addEventListener('click', function(){
 
 formProfile.addEventListener('submit', handleFormSubmit); 
 formCard.addEventListener('submit', handleFormCardSubmit);
-closeModelListener(editProfileModalWindow);
-closeModelListener(addCardModalWindow);
-closeModelListener(imageModalWindow);
+addCloseModelListeners(editProfileModalWindow);
+addCloseModelListeners(addCardModalWindow);
+addCloseModelListeners(imageModalWindow);
 
 addCardModalWindow.classList.add('popup_is-animated');
 imageModalWindow.classList.add('popup_is-animated');

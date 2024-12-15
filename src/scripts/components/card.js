@@ -9,17 +9,15 @@ export function createCard(data, removeCard, likeCard, openImage){
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardElement.querySelector('.card__title').textContent = data.name;
-  deleteButton.addEventListener('click',removeCard);
-  likeButtom.addEventListener('click',likeCard);
-  cardImage.addEventListener('click',function(evt){
-    openImage(data)
-  });
+  deleteButton.addEventListener('click', () => removeCard(cardElement));
+  likeButtom.addEventListener('click', likeCard);
+  cardImage.addEventListener('click', () => openImage(data));
   return cardElement
 }
 
 // @todo: Функция удаления карточки
-export function deleteCard(evt){
-evt.target.closest('.places__item').remove();
+export function deleteCard(cardElement){
+  cardElement.remove();
 };
 export function handleLikeCard(evt){
 evt.target.classList.toggle('card__like-button_is-active');
