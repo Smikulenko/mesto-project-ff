@@ -3,7 +3,6 @@ function escapeListener(evt){
   if (evt.key ==='Escape'){ 
     closeModal(openedPopup);
   }
-  document.removeEventListener('keyup', escapeListener);
 };
 
 function overlayClickListener(evt, modalWindow){
@@ -25,4 +24,5 @@ export function openModal(modalWindow){
 
 export function closeModal(modalWindow){
   modalWindow.classList.remove('popup_is-opened');
+  document.removeEventListener('keyup', escapeListener);
 };
