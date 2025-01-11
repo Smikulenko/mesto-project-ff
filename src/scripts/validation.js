@@ -1,7 +1,6 @@
 
 const showInputError = (formElement, inputElement, errorMessage, data) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  console.log(`.${inputElement.id}-error`)
   inputElement.classList.add(data.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(data.errorClass);
@@ -64,7 +63,6 @@ export const enableValidation = (data) => {
   formList.forEach((formElement) => {
     setEventListeners(formElement, data);
   });
- console.log(formList)
 };
 export const clearValidation = (formElement, data) => {
   const inputElementList = Array.from(formElement.querySelectorAll(data.inputSelector));
