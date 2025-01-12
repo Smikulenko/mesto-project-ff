@@ -77,12 +77,12 @@ function handleFormSubmit(evt){
     profileJob.textContent = updatedUser.about;
     closeModal(formProfile);
   })
-  .finally(() => {
-     profileSubmitButton.textContent = 'Сохранить';
-  }) 
   .catch((err) => {
     console.log(err);
-  });
+  })
+  .finally(() => {
+    profileSubmitButton.textContent = 'Сохранить';
+ });
   
 };
 function handleFormCardSubmit(evt){
