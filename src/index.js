@@ -27,6 +27,7 @@ const profileSubmitButton = formProfile.querySelector('.popup__button')
 const formEditAvatar = document.querySelector('.popup_type_edit_avatar')
 const linkAvatarInput = formEditAvatar.querySelector('.popup__input_type_url')
 const avatarSubmitButtom =formEditAvatar.querySelector('.popup__button')
+const formAvatar = formEditAvatar.querySelector('.popup__form')
 
 const formCardModalWindow = document.querySelector('.popup_type_new-card');
 const formCard = formCardModalWindow.querySelector('.popup__form')
@@ -47,8 +48,12 @@ function handleAvatarFormSubmit(evt){
   avatarSubmitButtom.textContent = 'Сохранение...';
   const link =linkAvatarInput.value;
   updateAvatar(link).then((updatedAvatar) => {
-    profileImage.style.backgroundImage = `url(${link})`;
+    profileImage.style.backgroundImage = `url(${updatedAvatar.avatar})`;
     closeModal(formEditAvatar);
+    formAvatar.reset();
+  })
+  .finally(() => {
+    avatarSubmitButtom.textContent = 'Сохранить';
   })
   .catch((err) => {
     console.log(err);
@@ -68,9 +73,12 @@ function handleFormSubmit(evt){
   const name = nameInput.value;
   const job = jobInput.value;
   updateUser(name,job).then((updatedUser) => {
-    profileName.textContent = name;
-    profileJob.textContent = job;
+    profileName.textContent = updatedUser.name;
+    profileJob.textContent = updatedUser.about;
     closeModal(formProfile);
+  })
+  .finally(() => {
+     profileSubmitButton.textContent = 'Сохранить';
   }) 
   .catch((err) => {
     console.log(err);
@@ -92,7 +100,11 @@ function handleFormCardSubmit(evt){
       );
     closeModal(formCardModalWindow);
     formCard.reset();
-  }) .catch((err) => {
+  }) 
+  .finally(() => {
+    cardSubmitButtom.textContent = 'Сохранинть';
+ }) 
+  .catch((err) => {
     console.log(err);
   });
  
@@ -103,6 +115,8 @@ profileImage.addEventListener('click',function(){
 })
 
 buttomEditProfile.addEventListener('click',function(){
+  nameInput.value= profileName.textContent;
+  jobInput.value=profileJob.textContent;
   openModal(formProfile);
   clearValidation(formProfile,popupElements)
 });

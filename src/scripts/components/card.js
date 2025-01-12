@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer';
 import{deleteCardApi,addLike, removeLike} from './api' 
 
 // @todo: Функция создания карточки
@@ -42,21 +41,22 @@ export function handleLikeCard(likeButtom,cardID,likeCardCounter){
   const likedCard = likeButtom.classList.contains('card__like-button_is-active')
   if (likedCard){
     removeLike(cardID).then(updateCard => {
-      likeCardCounter.textContent =updateCard.likes.length
+      likeCardCounter.textContent =updateCard.likes.length;
+      likeButtom.classList.toggle('card__like-button_is-active');
     })
     .catch((err) => {
       console.log(err);
     });
   } else {
     addLike(cardID).then(updateCard => {
-      likeCardCounter.textContent =updateCard.likes.length
+      likeCardCounter.textContent =updateCard.likes.length;
+      likeButtom.classList.toggle('card__like-button_is-active');
+      
     })
     .catch((err) => {
       console.log(err);
     });
   }
- 
-  likeButtom.classList.toggle('card__like-button_is-active');
 };
 
 
